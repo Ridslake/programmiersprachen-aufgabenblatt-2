@@ -16,7 +16,7 @@ class Vec2
 	Vec2& operator / (float v);
 };
 
-	Vec2 operator+(Vec2 const& u, Vec2 const& v);	//use class,  but no shit of it
+	Vec2 operator+(Vec2 const& u, Vec2 const& v);	//no memberfunction
 	Vec2 operator-(Vec2 const& u, Vec2 const& v);
 	Vec2 operator*(Vec2 const& v, float s);
 	Vec2 operator/(Vec2 const& v, float s);
