@@ -4,6 +4,10 @@
 #include <math.h>
 #include "mat2.hpp"
 #include "color.hpp"
+#include "rectangle.hpp"
+#include "circle.hpp"
+#include "color.hpp"
+#include <iostream>
 //Test cases for memberfunctions
 TEST_CASE("describe_default_const_Vec2", "[Vec2]")//default constructor
 {
@@ -201,6 +205,62 @@ TEST_CASE("colorre", "colorre")
 	REQUIRE(red.r == Approx(1.0));
 	REQUIRE(red.g == Approx(0.0));
 	REQUIRE(red.b == Approx(0.0));
+}
+TEST_CASE("rectangle", "rectangle")
+{
+	Rectangle def{};
+	REQUIRE(def.height == Approx(1));
+	REQUIRE(def.width == Approx(1));
+	Rectangle betta{3.5,40,{0.6,0.5,0.5}};
+	REQUIRE(betta.height == Approx(3.5));
+	REQUIRE(betta.width == Approx(40));
+	REQUIRE(betta.clr.r == Approx(0.6));
+	REQUIRE(betta.clr.g == Approx(0.5));
+	REQUIRE(betta.clr.b == Approx(0.5));
+}
+
+TEST_CASE("rectangleGetter", "Rgetter")
+{
+	Rectangle cust{3,40,{0.6,0.4,0.3}};
+	REQUIRE(cust.get_height() == Approx(3));
+	REQUIRE(cust.get_width() == Approx(40));
+	REQUIRE(cust.get_area() == Approx(120));
+	REQUIRE(cust.get_circumference() == Approx(3*2+40*2));
+	cust.set_height(5);
+	cust.set_width(-3);
+	REQUIRE(cust.get_height() == Approx(5));
+	REQUIRE(cust.get_width() == Approx(3));
+	REQUIRE(cust.clr.r == Approx(0.6));
+	REQUIRE(cust.clr.g == Approx(0.4));
+	REQUIRE(cust.clr.b == Approx(0.3));
+}
+TEST_CASE("circle", "circle")
+{
+	Circle def{};
+	Circle vier{4.0,{0.6,0.4,0.3}};
+	std::cout << vier.clr.r << "rot" << std::endl;
+	REQUIRE(def.radius == Approx(1));
+	REQUIRE(vier.radius == (4.0));
+	REQUIRE(vier.clr.r == Approx(0.6));
+	REQUIRE(vier.clr.g == Approx(0.4));
+	REQUIRE(vier.clr.b == Approx(0.3));
+}
+TEST_CASE("circleGetter", "Cgetter")
+{
+	Circle sieben{7.0, {0.3, 0.4, 0}};
+	REQUIRE(sieben.get_durchmesser() == Approx(14.0));
+	REQUIRE(sieben.get_flaeche() == Approx(7 * 7 * M_PI));
+	REQUIRE(sieben.get_circumference() == Approx(2 * M_PI * 7));
+	REQUIRE(sieben.get_radius() == Approx(7.0));
+	sieben.set_radius(3.0);
+	REQUIRE(sieben.get_radius() == Approx(3.0));
+	REQUIRE(sieben.clr.r == Approx(0.3));
+	REQUIRE(sieben.clr.g == Approx(0.4));
+	REQUIRE(sieben.clr.b == Approx(0));
+}
+TEST_CASE("Pointinsde", "Pintin")
+{
+
 }
 int main(int argc, char *argv[])
 {
